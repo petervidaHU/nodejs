@@ -44,10 +44,10 @@ setInterval(() => {
 
     writeTimer += 1;
 
-    if (!(writeTimer % 6)) {
+    if (writeTimer >= 600) {
         writeTimer = 0;
         fs.appendFile(LOG_FILE, getLineOfLog(data), (err) => {
             if (err) throw new Error(err);
         });
     }
-}, 10000);
+}, 100);
