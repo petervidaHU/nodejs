@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./module1/index.js",
-    "task1": "nodemon ./module3/testingEmitter.js"
+    "task1": "nodemon ./module3/testingEmitter.js",
+    "task2": "nodemon ./module3/withTime.js",
+    "task3": "nodemon ./module3/csvReader.js"
   },
   "author": "Peter Vida",
   "license": "ISC",

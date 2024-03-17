@@ -1,34 +1,37 @@
 import fs from 'fs';
+import path from 'path';
 import csv from 'csvtojson';
 
-const csvFilePath = 'csv/sample.csv';
-const outputFile = 'json/jsonOutput1.json';
-const readStream = fs.createReadStream(csvFilePath);
-const writeStream = fs.createWriteStream(outputFile, { flags: 'a' });
+const dirname = new URL('.', import.meta.url).pathname;
+const csvFilePath = path.join(dirname, 'csv', 'sample.csv');
+const outputFile = path.join(dirname, 'json', 'jsonOutput.json');
 
-const c = csv();
-writeStream.write('[')
+const readStreamFromCsv = fs.createReadStream(csvFilePath);
+const writeStreamToOutput = fs.createWriteStream(outputFile, { flags: 'a' });
+
+writeStreamToOutput.write('[')
+
 
 let first = true;
 
-readStream.pipe(c).on('data', (r) => {
+readStreamFromCsv.pipe(csv()).on('data', (r) => {
     const json = JSON.parse(r);
     const jsonS = JSON.stringify(json);
     console.log(jsonS);
     if (first) {
-        writeStream.write('\n' + jsonS);
+        writeStreamToOutput.write('\n' + jsonS);
         first = false;
     } else {
-        writeStream.write(',\n' + jsonS);
+        writeStreamToOutput.write(',\n' + jsonS);
     }
 })
     .on('end', () => {
-        writeStream.write('\n]')
-        writeStream.end();
+        writeStreamToOutput.write('\n]')
+        writeStreamToOutput.end();
         console.log('ok');
     })
     .on('error', (e) => {
-        writeStream.write('\n]')
-        writeStream.end();
+        writeStreamToOutput.write('\n]')
+        writeStreamToOutput.end();
         console.log('there was an error on some row', e);
     });
