@@ -40,10 +40,10 @@ console.log(myEmitter.listenerCount('eventOne'));
 // Get array of rawListeners//
 // Event registered with 'once()' will not be available here after the
 // emit has been called
-console.log(myEmitter.rawListeners('eventOne'));
+console.log('myEmitter.rawListeners(eventOne):::', myEmitter.rawListeners('eventOne'));
 
 // Get listener's count after remove one or all listeners of 'eventOne'
 myEmitter.off('eventOne', c1);
 console.log(myEmitter.listenerCount('eventOne'));
 myEmitter.off('eventOne', c2);
-console.log(myEmitter.listenerCount('eventOne'));
+console.log('eventOne', myEmitter.listenerCount('eventOne'));

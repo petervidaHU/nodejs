@@ -14,12 +14,12 @@ class mEventEmitter {
 
     addListener(eventName, fn) {
         this.eventNameCheck(eventName)
-        this.eventEmitter.on(eventName, (arg) => fn(arg));
+        this.eventEmitter.on(eventName, fn);
     }
 
     on(eventName, fn) {
         this.eventNameCheck(eventName)
-        this.eventEmitter.on(eventName, (arg) => fn(arg));
+        this.eventEmitter.on(eventName, fn);
     }
 
     removeListener(eventName, fn) {
