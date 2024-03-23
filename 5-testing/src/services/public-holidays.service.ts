@@ -12,10 +12,8 @@ export const getListOfPublicHolidays = async (year: number, country: string): Pr
     const { data: publicHolidays } = await axios.get<PublicHoliday[]>(
       `${PUBLIC_HOLIDAYS_API_URL}/PublicHolidays/${year}/${country}`,
     );
-    console.log('public ok:', publicHolidays)
     return publicHolidays.map((holiday) => shortenPublicHoliday(holiday));
   } catch (error) {
-    console.log('pulic:', error)
     return [];
   }
 };

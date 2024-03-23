@@ -1,55 +1,42 @@
-import axios from 'axios';
 import { SUPPORTED_COUNTRIES } from "../config";
-import { getNextPublicHolidays, checkIfTodayIsPublicHoliday, getListOfPublicHolidays } from './public-holidays.service';
-import { nextPublicHolidayMockresponse, nextPublicHolidayMockresponseShorten, publicHolidaysMockResp, publicHolidaysShortMockResp } from '../mocks/api-publicholidays-200';
+import { getNextPublicHolidays, getListOfPublicHolidays } from './public-holidays.service';
 
 const goodCountry = SUPPORTED_COUNTRIES[0];
 const goodYear = new Date().getFullYear();
+const HOLIDAY_SHORTEN_INTERFACE_LENGTH = 3;
 
 describe('public-holiday service tests:', () => {
     describe('getListOfPublicHolidays fn:', () => {
         it('give back an array of shorten holidays', async () => {
-
             const publicHolidayList = await getListOfPublicHolidays(goodYear, goodCountry);
+            // TODO: if day of testing is 27th of December, the proper response is [],
 
-            expect(publicHolidayList).toEqual(publicHolidaysShortMockResp);
-        })
+            publicHolidayList.forEach(holiday => {
+                const holidayKeys = Object.keys(holiday).length;
 
-        it('give back an empty array if API response is 400', async () => {
-
-            const publicHolidayList = await getListOfPublicHolidays(goodYear, goodCountry);
-
-            expect(publicHolidayList).toEqual([]);
+                expect(holidayKeys).toBe(HOLIDAY_SHORTEN_INTERFACE_LENGTH);
+                expect(holiday).toHaveProperty('date');
+                expect(holiday).toHaveProperty('localName');
+                expect(holiday).toHaveProperty('name');
+            })
         })
     })
 
-    /*    describe('checkIfTodayIsPublicHoliday fn:', () => {
-           it.each([
-               ['GB', 200, true],
-               ['GB', 204, false],
-               ['GB', 400, false],
-           ])('check %s if today is a public holiday: %s', async (param, response, expected) => {
-               const isPublicHoliday = await checkIfTodayIsPublicHoliday(param);
-   
-               expect(isPublicHoliday).toEqual(expected);
-           })
-       })
-   
-       describe('getNextPublicHolidays fn:', () => {
-           it('give back a list of next holidays', async () => {
-   
-               const publicHolidayList = await getNextPublicHolidays('GB');
-   
-               expect(publicHolidayList).toEqual(nextPublicHolidayMockresponseShorten);
-           })
-   
-           it('give back an empty array if error happens', async () => {
-   
-               const publicHolidayList = await getNextPublicHolidays('GB');
-   
-               expect(publicHolidayList).toEqual([]);
-           })
-       }) */
+    describe('getNextPublicHolidays fn:', () => {
+        it('give back an array of shorten next holidays', async () => {
+            const publicHolidayList = await getNextPublicHolidays(goodCountry);
+            // TODO: if day of testing is 27th of December, the proper response is [],
+
+            publicHolidayList.forEach(holiday => {
+                const holidayKeys = Object.keys(holiday).length;
+
+                expect(holidayKeys).toBe(HOLIDAY_SHORTEN_INTERFACE_LENGTH);
+                expect(holiday).toHaveProperty('date');
+                expect(holiday).toHaveProperty('localName');
+                expect(holiday).toHaveProperty('name');
+            })
+        })
+    })
 
     afterEach(() => {
         jest.clearAllMocks();
