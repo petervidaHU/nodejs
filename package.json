@@ -5,11 +5,18 @@
   "description": "nodeJs global mentoring tasks",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./module1/index.js"
+    "start": "nodemon ./module1/index.js",
+    "task1": "nodemon ./module3/testingEmitter.js",
+    "task2": "nodemon ./module3/withTime.js",
+    "task3": "nodemon --ignore './module3/json/*' ./module3/csvReader.js"
   },
   "author": "Peter Vida",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "csvtojson": "^2.0.10"
   }
 }
