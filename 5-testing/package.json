@@ -4,8 +4,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "test": "jest",
-    "test:e2e": "jest",
+    "test": "jest --testPathPattern .*\\.test\\.ts$",
+    "test:e2e": "jest --testPathPattern .*\\.spec\\.ts$",
     "test:coverage": "jest --coverage"
   },
   "author": "",
