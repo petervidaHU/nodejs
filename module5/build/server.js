@@ -1,13 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_1 = __importDefault(require("http"));
-const server = http_1.default.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!');
+const http_1 = require("http");
+const controllers_1 = require("./controllers");
+const server = (0, http_1.createServer)((req, res) => {
+    try {
+        (0, controllers_1.controllers)(req, res);
+    }
+    catch (err) {
+        res.statusCode = 500;
+        res.end('error' + err);
+    }
+    res.on('finish', () => {
+        // log
+    });
 });
 server.listen(3000, () => {
     console.log('Server is running on port 3000');

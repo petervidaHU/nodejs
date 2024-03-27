@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.patchService = exports.deleteService = exports.postService = exports.getService = void 0;
+const get_service_1 = require("./get-service");
+Object.defineProperty(exports, "getService", { enumerable: true, get: function () { return get_service_1.getService; } });
+const post_service_1 = require("./post-service");
+Object.defineProperty(exports, "postService", { enumerable: true, get: function () { return post_service_1.postService; } });
+const delete_service_1 = require("./delete-service");
+Object.defineProperty(exports, "deleteService", { enumerable: true, get: function () { return delete_service_1.deleteService; } });
+const patch_service_1 = require("./patch-service");
+Object.defineProperty(exports, "patchService", { enumerable: true, get: function () { return patch_service_1.patchService; } });
