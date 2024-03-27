@@ -6,6 +6,7 @@ export const getService = (res: ServerResponse, routes: Array<string>) => {
   res.setHeader('Content-Type', 'application/json');
 
   if (routes.length === 0) {
+    res.setHeader('Cache-Control', 'public, max-age=3600');
     try {
       const users = DB;
 
@@ -34,6 +35,7 @@ export const getService = (res: ServerResponse, routes: Array<string>) => {
     }
 
     if (hobbies) {
+      res.setHeader('Cache-Control', 'private, max-age=3600');
       const hobbies = user && user.hobbies ? user.hobbies : [];
 
       res.statusCode = 200;

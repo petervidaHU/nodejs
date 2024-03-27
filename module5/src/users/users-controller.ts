@@ -17,7 +17,7 @@ export const usersController = (req: IncomingMessage, res: ServerResponse, route
             postService(req, res);
             break;
         case 'DELETE':
-            deleteService(req, res);
+            deleteService(res, routes);
             break;
         case 'PATCH':
             patchService(req, res, routes);
